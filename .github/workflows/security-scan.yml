@@ -12,17 +12,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: "Build Docker image"
         run: docker build -t my-vulnerable-image .
 
       - name: "Run Trivy Scan on Docker image"
-        uses: douglasmendeslda/gha-synk-scan@main
+        uses: douglasmendeslda/gha-trivy@main
         with:
           image: "my-vulnerable-image"
 
       - name: "Check vulnerabilities output"
+        #test
         shell: bash
         run: |
             echo "Number of vulnerabilities: ${{ steps.trivy_scan.outputs.vulnerabilities_found }}"
+
+  just-testing:
+    needs:  trivy_scan_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Hello"
+        shell: bash
+        run: echo "Hello World"
+

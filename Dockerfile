@@ -1,11 +1,14 @@
-# Use an old base image to simulate vulnerabilities
-FROM ubuntu:18.04
+# Use an older base image to simulate vulnerabilities
+FROM ubuntu:latest
 
-# Install some outdated packages
+# Install curl and openssl (latest versions available for this base image)
 RUN apt-get update && \
     apt-get install -y \
-    curl=7.58.0-2ubuntu3.10 \
-    openssl=1.1.1-1ubuntu2.1~18.04.5
+    curl \
+    openssl
+
+# Create the application directory
+RUN mkdir -p /usr/src/app
 
 # Create a basic application file
 RUN echo "Hello, this is a vulnerable image!" > /usr/src/app/index.html
