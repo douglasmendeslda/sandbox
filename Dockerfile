@@ -1,23 +1,23 @@
-# Use an older base image to simulate vulnerabilities
-FROM ubuntu:latest
+# Use uma versão antiga e vulnerável do Ubuntu
+FROM ubuntu:18.04
 
-# Install curl and openssl (latest versions available for this base image)
+# Instalar curl e openssl sem atualizar para versões mais recentes
 RUN apt-get update && \
     apt-get install -y \
-    curl \
-    openssl
+    curl=7.58.0-2ubuntu3.16 \
+    openssl=1.1.1-1ubuntu2.1~18.04.20
 
-# Create the application directory
+# Criar o diretório da aplicação
 RUN mkdir -p /usr/src/app
 
-# Create a basic application file
+# Criar um arquivo básico de aplicação
 RUN echo "Hello, this is a vulnerable image!" > /usr/src/app/index.html
 
-# Set working directory
+# Definir o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Expose a port for demonstration
+# Expor uma porta para demonstração
 EXPOSE 8080
 
-# Run a simple command
+# Executar um comando simples
 CMD ["cat", "index.html"]
