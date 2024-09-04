@@ -27,3 +27,11 @@ jobs:
         shell: bash
         run: |
             echo "Number of vulnerabilities: ${{ steps.trivy_scan.outputs.vulnerabilities_found }}"
+            
+  just-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Hello"
+        shell: bash
+        run: echo "Hello World"
+
