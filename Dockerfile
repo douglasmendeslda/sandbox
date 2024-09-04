@@ -1,29 +1,23 @@
-# Use uma versão antiga e conhecida por ter vulnerabilidades
-FROM ubuntu:20.04
+# Use an older base image to simulate vulnerabilities
+FROM ubuntu:latest
 
-# Definir a variável de ambiente DEBIAN_FRONTEND para não interativo
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Instalar pacotes que introduzem vulnerabilidades
+# Install curl and openssl (latest versions available for this base image)
 RUN apt-get update && \
     apt-get install -y \
     curl \
-    openssl \
-    wget \
-    apache2 \
-    python2.7  # Python 2.7 é conhecido por ter diversas vulnerabilidades, pois não recebe mais suporte
+    openssl
 
-# Criar o diretório da aplicação
+# Create the application directory
 RUN mkdir -p /usr/src/app
 
-# Criar um arquivo básico de aplicação
+# Create a basic application file
 RUN echo "Hello, this is a vulnerable image!" > /usr/src/app/index.html
 
-# Definir o diretório de trabalho
+# Set working directory
 WORKDIR /usr/src/app
 
-# Expor uma porta para demonstração
+# Expose a port for demonstration
 EXPOSE 8080
 
-# Executar um comando simples
+# Run a simple command
 CMD ["cat", "index.html"]
