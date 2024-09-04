@@ -1,11 +1,14 @@
-# Use uma versão antiga e vulnerável do Ubuntu
-FROM ubuntu:18.04
+# Use uma versão antiga e conhecida por ter vulnerabilidades
+FROM ubuntu:20.04
 
-# Instalar curl e openssl sem atualizar para versões mais recentes
+# Instalar pacotes que introduzem vulnerabilidades
 RUN apt-get update && \
     apt-get install -y \
-    curl=7.58.0-2ubuntu3.16 \
-    openssl=1.1.1-1ubuntu2.1~18.04.20
+    curl \
+    openssl \
+    wget \
+    apache2 \
+    python2.7  # Python 2.7 é conhecido por ter diversas vulnerabilidades, pois não recebe mais suporte
 
 # Criar o diretório da aplicação
 RUN mkdir -p /usr/src/app
