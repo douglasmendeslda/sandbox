@@ -23,6 +23,7 @@ jobs:
           image: "my-vulnerable-image"
 
       - name: "Check vulnerabilities output"
+        #test
         shell: bash
         run: |
             echo "Number of vulnerabilities: ${{ steps.trivy_scan.outputs.vulnerabilities_found }}"
