@@ -1,6 +1,9 @@
 # Use uma versão antiga e conhecida por ter vulnerabilidades
 FROM ubuntu:20.04
 
+# Definir a variável de ambiente DEBIAN_FRONTEND para não interativo
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Instalar pacotes que introduzem vulnerabilidades
 RUN apt-get update && \
     apt-get install -y \
