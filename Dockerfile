@@ -1,5 +1,5 @@
 # Use an older base image to simulate vulnerabilities
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
 # Install curl and openssl (latest versions available for this base image)
 RUN apt-get update && \
