@@ -7,6 +7,9 @@ RUN apt-get update && \
     curl \
     openssl
 
+# Create the application directory
+RUN mkdir -p /usr/src/app
+
 # Create a basic application file
 RUN echo "Hello, this is a vulnerable image!" > /usr/src/app/index.html
 
